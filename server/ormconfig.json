@@ -1,0 +1,24 @@
+{
+   "type": "mysql",
+   "host": "localhost",
+   "port": 3306,
+   "username": "root",
+   "password": "",
+   "database": "final_project_market",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "db/entity/**/*.ts"
+   ],
+   "migrations": [
+      "db/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "db/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "db/entity",
+      "migrationsDir": "db/migration",
+      "subscribersDir": "db/subscriber"
+   }
+}

@@ -1,0 +1,31 @@
+.cart-area {
+    width: 300px;
+    min-height: 500px;
+    margin-top: 65px;
+    border: 2px solid red;
+    overflow: auto;
+    /*z-index: 9999;*/
+}
+
+.cart-buttons {
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    margin: 0.1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem #404040 solid;
+    background-color: #f0c040;
+    width: 100%;
+    cursor: pointer;
+
+}
+
+.add {
+    background-color: #40c0f0;
+    width: 1.5rem;
+
+}
+
+.remove {
+    background-color: #f04040;
+    width: 1.5rem;
+}
