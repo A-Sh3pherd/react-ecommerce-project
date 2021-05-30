@@ -12,7 +12,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [pickedCategory, setPickedCategory] = useState(Number);
   const [cartProducts, setCartProducts] = useState([]);
-  const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useState(true);
 
   const history = useHistory();
 
@@ -121,6 +121,8 @@ const Home = () => {
   useEffect(() => {
     getCart()
       .then((r) => {
+        console.log(r);
+        
         setCartProducts(
           r.oldCart.cartProducts.map((cartProduct) => ({
             ...cartProduct.product,
@@ -133,7 +135,8 @@ const Home = () => {
 
   // Everytime cartProducts changes
   useEffect(() => {
-    updateCartOnDb().catch((e) => console.log(e));
+    updateCartOnDb()
+    .catch((e) => console.log(e));
   }, [cartProducts]);
 
   return (
