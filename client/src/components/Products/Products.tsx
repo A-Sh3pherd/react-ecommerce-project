@@ -17,27 +17,28 @@ const Products = ({products, setProducts, pickedCategory, getProducts, onAddToCa
 
 
     return (
-            <Row id='products-main-row'>
-                {products && products.map((product: IProduct) => (
-                    <Col key={product.id}>
-                        <Card style={{width: '18rem'}} className='product-card'>
-                            <Card.Img variant="top" style={{height: '400px'}} src={product.image_url}/>
-                            <Card.Body>
-                                <Card.Header> {product.name} </Card.Header>
-                                <Card.Footer>
+        <Row id='products-main-row'>
+            {products && products.map((product: IProduct) => (
+                <Col key={product.id}>
+                    <Card style={{width: '18rem'}} className='product-card'>
+                        <Card.Img variant="top" style={{height: '400px'}} src={product.image_url}/>
+                        <Card.Body>
+                            <Card.Header> {product.name} </Card.Header>
+                            <Card.Footer>
                                     <span className="product-price">
                                         {product.price} $
                                     </span>
-                                </Card.Footer>
-                            </Card.Body>
-                            <button
-                                className='add-to-cart-button'
-                                type='button'
-                                onClick={() => onAddToCart(product)}>Add To Cart</button>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+                            </Card.Footer>
+                        </Card.Body>
+                        <button
+                            className='add-to-cart-button'
+                            type='button'
+                            onClick={() => onAddToCart(product)}>Add To Cart
+                        </button>
+                    </Card>
+                </Col>
+            ))}
+        </Row>
     );
 };
 

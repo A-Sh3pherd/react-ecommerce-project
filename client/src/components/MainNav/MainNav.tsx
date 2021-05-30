@@ -1,45 +1,63 @@
-import React from 'react';
-import {Container, Nav, Navbar} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import {MainNavData} from './MainNavData';
-import './MainNav.css';
+import React from "react";
+import {Col, Nav, Navbar, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {MainNavData} from "./MainNavData";
+import * as AiIcons from "react-icons/ai";
 
-const MainNav = () => {
-    return (
-        <Navbar bg="dark" expand="lg">
-            <Container fluid>
-                <Navbar.Brand>
-                    <Link to='/' id='brand' > Shopping Project </Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className='mr-auto'>
-                        {/* Mapping nav data here */}
-                        {MainNavData.map((item, index) => {
-                            return (
-                                <Link
-                                    to={item.path}
-                                    key={index}
-                                    className={item.className}
-                                    style={{fontSize: '1.2rem', margin: '20px', textDecoration: 'none', color: 'white'}}
-                                >
-                                    {item.icon}
-                                    <span>{item.title}</span>
-                                </Link>
-                            )
-                        })}
-                        {/*<Link*/}
-                        {/*    to='/cart'*/}
-                        {/*    style={{fontSize: '1.2rem', margin: '20px', textDecoration: 'none', color: 'white',marginLeft: '50'}}*/}
-                        {/*>*/}
-                        {/*    {<AiIcons.AiOutlineShoppingCart />} Cart*/}
-                        {/*</Link>*/}
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+// Styled Nav
+
+const MainNav = ({cartAmount, showCartHandler}) => {
+  return (
+      <Row className="nav-row">
+        <Navbar expand="md" bg={"dark"} variant={"dark"}>
+          <Col className="col-4 d-flex justify-content-center">
+            <Navbar.Brand href="#home">Market-Project </Navbar.Brand>
+          </Col>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            {MainNavData.map((item, index) => {
+              return (
+                <Col className="col-3" key={index}>
+                  <Link
+                    to={item.path}
+                    className={item.className}
+                    style={{
+                      fontSize: "1.2rem",
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    {item.icon}
+                    {item.title}
+                  </Link>
+                </Col>
+              );
+            })}
+          </Navbar.Collapse>
+          <Col className="col-4 d-flex justify-content-center">
+            <Nav.Item
+              className="nav-text cart-badge"
+              style={{
+                fontSize: "1.2rem",
+                margin: "15px",
+                textDecoration: "none",
+                color: "white",
+              }}
+              onClick={showCartHandler}
+            >
+              <div id="cart-span">
+                <AiIcons.AiOutlineShoppingCart
+                  size={40}
+                  color="white"
+                  style={{marginRight: "5px"}}
+                />
+                {cartAmount ? <span className="badge">{cartAmount}</span> : ""}
+              </div>
+            </Nav.Item>
+          </Col>
         </Navbar>
-    );
+      </Row>
+  );
 };
 
 export default MainNav;
-

@@ -14,10 +14,4 @@ export const MainNavData = [
         icon: <AiIcons.AiOutlineLogout/>,
         className: 'nav-text',
     },
-    {
-        title: 'Cart',
-        path: '/cart',
-        icon: <AiIcons.AiOutlineShoppingCart/>,
-        className: 'nav-text',
-    },
 ]

@@ -38,7 +38,7 @@ export class User extends BaseEntity {
 
     @OneToMany(() => Orders, order => order.user)
     @JoinColumn()
-    order: Orders[]
+    orders: Orders[]
 
     @CreateDateColumn()
     created_at: Date;

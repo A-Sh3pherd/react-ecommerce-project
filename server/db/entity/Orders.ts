@@ -27,17 +27,14 @@ export class Orders extends BaseEntity {
     @Column()
     delivery_date: Date
 
-    @Column()
-    order_at: Date
+    @Column({})
+    credit_card: string
 
-    @Column()
-    card_details: number
-
-    @ManyToOne(type => User, user => user.id)
+    @ManyToOne(() => User, user => user.orders)
     @JoinColumn()
     user: User
 
-    @OneToOne(type => Cart)
+    @OneToOne(() => Cart)
     @JoinColumn()
     cart: Cart
 

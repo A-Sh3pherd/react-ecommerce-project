@@ -17,7 +17,7 @@ export class Cart extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({default: 'in-progress'})
+    @Column({default: 'open'})
     status: string
 
     @ManyToOne(() => User, user => user.id)

@@ -15,6 +15,7 @@ const registerRoute = require('./routes/register');
 const productRoute = require('./routes/products/products')
 const categoryRoute = require('./routes/category')
 const cartRoute = require('./routes/cart');
+const orderRoute = require ('./routes/order');
 //Routes
 app.get('/', (req, res) => {
     res.send('Hello World')
@@ -33,6 +34,9 @@ app.use('/category', categoryRoute);
 
 // Cart
 app.use('/cart', cartRoute);
+
+// Order
+app.use('/order', orderRoute);
 
 //Loading Server
 createConnection()
