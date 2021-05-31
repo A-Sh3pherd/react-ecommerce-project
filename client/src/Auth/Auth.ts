@@ -27,12 +27,11 @@ class Auth {
     // Validations
     validateEmail(email: string) {
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-            return true
+            return true;
         }
-        alert("You have entered an invalid email address!")
-        return false
+        alert('You have entered an invalid email address!');
+        return false;
     }
-
 }
 
 export default new Auth();

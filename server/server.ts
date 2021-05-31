@@ -4,10 +4,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT;
-import {createConnection} from "typeorm";
+import { createConnection } from "typeorm";
 // Middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 // Route imports
 const loginRoute = require('./routes/login');
@@ -15,7 +15,7 @@ const registerRoute = require('./routes/register');
 const productRoute = require('./routes/products/products')
 const categoryRoute = require('./routes/category')
 const cartRoute = require('./routes/cart');
-const orderRoute = require ('./routes/order');
+const orderRoute = require('./routes/order');
 //Routes
 app.get('/', (req, res) => {
     res.send('Hello World')

@@ -48,8 +48,6 @@ router.put('/update', async (req, res) => {
         relations: ['cartProducts'],
         where: { status: 'open', user: { id: userId } }
     })
-    const oldCart_cartProducts = oldCart.cartProducts
-    const productId: [] = products.map(product => product.id)
 
     // Looping through all products and updating the amount and existance
     for (const product of products) {

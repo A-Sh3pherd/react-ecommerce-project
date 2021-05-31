@@ -12,7 +12,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [pickedCategory, setPickedCategory] = useState(Number);
   const [cartProducts, setCartProducts] = useState([]);
-  const [showCart, setShowCart] = useState(true);
+  const [showCart, setShowCart] = useState(false);
 
   const history = useHistory();
 
@@ -74,6 +74,7 @@ const Home = () => {
     } else {
       setCartProducts([...cartProducts, {...product, amount: 1}]);
     }
+    // If cart is not empty, show it to the client.
   };
 
   // When removing from cart
@@ -102,14 +103,9 @@ const Home = () => {
   // When emptying cart
   async function emptyCart(productId: number) {
     const userId = JSON.parse(localStorage.getItem("activeUser"));
-    const {data} = await axios.delete(
-      `http://localhost:3005/cart/${userId.id}`,
-      {
-        params: {productId: productId},
-      }
-    );
-
-    console.log(data);
+    await axios.delete(`http://localhost:3005/cart/${userId.id}`, {
+      params: {productId: productId},
+    });
   }
 
   // When user Checkout
@@ -121,8 +117,7 @@ const Home = () => {
   useEffect(() => {
     getCart()
       .then((r) => {
-        console.log(r);
-        
+        r.oldCart.cartProducts > 0 && alert('You have an open cart!')
         setCartProducts(
           r.oldCart.cartProducts.map((cartProduct) => ({
             ...cartProduct.product,
@@ -135,8 +130,9 @@ const Home = () => {
 
   // Everytime cartProducts changes
   useEffect(() => {
-    updateCartOnDb()
-    .catch((e) => console.log(e));
+    updateCartOnDb().catch((e) => console.log(e));
+
+    cartProducts.length ? setShowCart(true) : setShowCart(false);
   }, [cartProducts]);
 
   return (
@@ -146,7 +142,6 @@ const Home = () => {
           cartAmount={cartProducts.length}
           showCartHandler={showCartHandler}
         />
-        <br />
         <CategoryNavbar
           pickCategory={pickCategory}
           setPickedCategory={setPickedCategory}

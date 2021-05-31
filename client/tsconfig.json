@@ -8,7 +8,6 @@
       "ESNext"
     ],
     "jsx": "react-jsx",
-    "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "strict": false,
@@ -17,9 +16,13 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/"
   ]
 }

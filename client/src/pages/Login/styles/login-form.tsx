@@ -12,12 +12,20 @@ export const StyledLoginBackground = styled.div`
 export const StyledLoginForm = styled.form`
   border: 1px solid #dbdbdb;
   box-shadow: 0px 0px 50px -6px grey;
-  width: 35%;
+  width: 20vw;
   margin: 10rem auto;
   padding: 1rem;
   font-size: 0.85;
 `;
 
 export const StyledButton = styled.p`
-  margin-top: 0.5rem;
+  margin-top: 0.85rem;
+  justify-content: center;
+  font-size: 0.85rem;
+  overflow: hidden;
+`;
+
+export const StyledRegisterParagraph = styled.p`
+  font-size: 0.85rem;
+  text-align: center;
 `;

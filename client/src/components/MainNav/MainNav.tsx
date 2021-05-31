@@ -8,55 +8,60 @@ import * as AiIcons from "react-icons/ai";
 
 const MainNav = ({cartAmount, showCartHandler}) => {
   return (
-      <Row className="nav-row">
-        <Navbar expand="md" bg={"dark"} variant={"dark"}>
-          <Col className="col-4 d-flex justify-content-center">
-            <Navbar.Brand href="#home">Market-Project </Navbar.Brand>
-          </Col>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            {MainNavData.map((item, index) => {
-              return (
-                <Col className="col-3" key={index}>
-                  <Link
-                    to={item.path}
-                    className={item.className}
-                    style={{
-                      fontSize: "1.2rem",
-                      textDecoration: "none",
-                      color: "white",
-                    }}
-                  >
-                    {item.icon}
-                    {item.title}
-                  </Link>
-                </Col>
-              );
-            })}
-          </Navbar.Collapse>
-          <Col className="col-4 d-flex justify-content-center">
-            <Nav.Item
-              className="nav-text cart-badge"
-              style={{
-                fontSize: "1.2rem",
-                margin: "15px",
-                textDecoration: "none",
-                color: "white",
-              }}
-              onClick={showCartHandler}
-            >
-              <div id="cart-span">
-                <AiIcons.AiOutlineShoppingCart
-                  size={40}
-                  color="white"
-                  style={{marginRight: "5px"}}
-                />
-                {cartAmount ? <span className="badge">{cartAmount}</span> : ""}
-              </div>
-            </Nav.Item>
-          </Col>
-        </Navbar>
-      </Row>
+    <Row className="nav-row">
+      <Navbar expand="md" bg={"light"} variant={"light"}>
+        <Col className="col-4 d-flex justify-content-center">
+          <Navbar.Brand href="#home"> Market-Project </Navbar.Brand>
+        </Col>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          {MainNavData.map((item, index) => {
+            return (
+              <Col className="col-3" key={index}>
+                <Link
+                  to={item.path}
+                  className={item.className}
+                  style={{
+                    fontSize: "1rem",
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  {item.icon}
+                  {item.title}
+                </Link>
+              </Col>
+            );
+          })}
+        </Navbar.Collapse>
+        <Col className="col-4 d-flex justify-content-center">
+          <Nav.Item
+            className="nav-text cart-badge"
+            style={{
+              fontSize: "1rem",
+              margin: "15px",
+              textDecoration: "none",
+              color: "black",
+            }}
+            onClick={showCartHandler}
+          >
+            <div id="cart-span">
+              <AiIcons.AiOutlineShoppingCart size={30} color="red" style={{cursor: 'pointer'}}/>
+              {cartAmount ? (
+                <span className="badge" style={{background: "red", opacity: '0.7'}}>
+                  {cartAmount}
+                </span>
+              ) : (
+                <span style={{fontSize: "0.80rem", cursor: "pointer"}}>
+                  {" "}
+                  {"Cart is empty."}
+                </span>
+              )}
+            </div>
+          </Nav.Item>
+        </Col>
+      </Navbar>
+    </Row>
   );
 };
 

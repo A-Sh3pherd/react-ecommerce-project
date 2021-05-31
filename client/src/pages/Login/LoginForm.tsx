@@ -1,35 +1,47 @@
 import React from "react";
-import {Form, Container, Button} from "react-bootstrap";
-import {StyledButton, StyledLoginForm} from "./styles/login-form";
+import {Button, Container, Form, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {
+  StyledButton,
+  StyledLoginForm,
+  StyledRegisterParagraph,
+} from "./styles/login-form";
 
 function LoginForm({setEmail, setPassword, login}) {
   return (
     <StyledLoginForm>
+      <h1 className="text-center"> Login </h1>
+      <br />
       <Form>
         <Container id="login-form">
           <Form.Group>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
-              placeholder="Email..."
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
-              placeholder="Password..."
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <StyledButton>
-            <Button type="button" onClick={login}>
-              {" "}
-              Login{" "}
-            </Button>
+            <Row>
+              <Button type="button" onClick={login} size="sm">
+                {" "}
+                Login{" "}
+              </Button>
+            </Row>
           </StyledButton>
         </Container>
       </Form>
+      <StyledRegisterParagraph>
+        <p className="register">
+          Don't have an account? Register <Link to="/register">here</Link>
+        </p>
+      </StyledRegisterParagraph>
     </StyledLoginForm>
   );
 }

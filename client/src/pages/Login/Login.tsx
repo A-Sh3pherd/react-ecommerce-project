@@ -4,7 +4,6 @@ import {Col, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import Auth from "../../Auth/Auth";
 import LoginForm from "./LoginForm";
-import {StyledLoginBackground} from "./styles/login-form";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,20 +27,17 @@ const Login = () => {
   };
 
   return (
-      <Row >
-        <Col className="col-6">
+    <>
+      <Row>
+        <Col className="col-12">
           <LoginForm
             setEmail={setEmail}
             setPassword={setPassword}
             login={login}
           />
         </Col>
-
-        <Col className="col-6 text-center">
-          <h1 style={{marginTop: '10rem'}}> About + Photo </h1>
-        </Col>
-
       </Row>
+    </>
   );
 };
 
