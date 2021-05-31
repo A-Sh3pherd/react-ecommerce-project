@@ -40,8 +40,6 @@ router.post('/', async (req, res) => {
             user
         }).save();
 
-        console.log(newOrder.id);
-
         // Closing the cart
         cartExist.status = 'shipping'
         await cartExist.save();

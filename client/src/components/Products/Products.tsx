@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import IProduct from "./Products.model";
 import "./Products.css";
 import {StyledProduct} from "./styles/StyledProduct";
+import {AdminContext} from "../../context/AdminContext";
 
 const Products = ({
   products,
@@ -11,6 +12,12 @@ const Products = ({
   getProducts,
   onAddToCart,
 }) => {
+  const {admin} = useContext(AdminContext);
+
+  // productChangeHandler
+  function productChangeHandler() {
+    console.log("change product");
+  }
   // Onload- Get all products
   useEffect(() => {
     getProducts()
@@ -20,7 +27,7 @@ const Products = ({
 
   useEffect(() => {
     setProducts(pickedCategory);
-  }, [pickedCategory]);
+  }, [pickedCategory, setProducts]);
 
   return (
     <StyledProduct>
@@ -43,9 +50,13 @@ const Products = ({
                 <button
                   className="add-to-cart-button"
                   type="button"
-                  onClick={() => onAddToCart(product)}
+                  onClick={
+                    !admin
+                      ? () => onAddToCart(product)
+                      : () => productChangeHandler()
+                  }
                 >
-                  Add To Cart
+                  {!admin ? "Add To Cart" : "Change Products"}
                 </button>
               </Card>
             </Col>

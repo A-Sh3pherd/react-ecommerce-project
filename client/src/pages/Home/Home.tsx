@@ -14,7 +14,7 @@ const Home = () => {
   const [pickedCategory, setPickedCategory] = useState(Number);
   const [cartProducts, setCartProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const {admin} = useContext(AdminContext);
+  const {admin, setAdmin} = useContext(AdminContext);
 
   const history = useHistory();
 
@@ -43,12 +43,23 @@ const Home = () => {
   // Get cart onLoad
   async function getCart() {
     const user = JSON.parse(localStorage.getItem("activeUser"));
-    const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
-    return data;
+    if (user.role === "admin") {
+      return setAdmin(user);
+    } else {
+      const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
+      data.oldCart.cartProducts > 0 && alert("You have an open cart!");
+      setCartProducts(
+        data.oldCart.cartProducts.map((cartProduct) => ({
+          ...cartProduct.product,
+          amount: cartProduct.amount,
+        }))
+      );
+    }
   }
 
   // Update cart on db- whenever user add/remove product
   async function updateCartOnDb() {
+    if (admin) return;
     console.log("Updating cart");
     const activeUser = JSON.parse(localStorage.getItem("activeUser"));
 
@@ -120,18 +131,7 @@ const Home = () => {
 
   // Get Cart onload
   useEffect(() => {
-    admin && console.log(admin);
-    getCart()
-      .then((r) => {
-        r.oldCart.cartProducts > 0 && alert("You have an open cart!");
-        setCartProducts(
-          r.oldCart.cartProducts.map((cartProduct) => ({
-            ...cartProduct.product,
-            amount: cartProduct.amount,
-          }))
-        );
-      })
-      .catch((e) => console.log(e));
+    getCart().catch((e) => console.log(e));
   }, []);
 
   return (
@@ -150,7 +150,6 @@ const Home = () => {
 
       <Container fluid className="d-flex" style={{width: "80%"}}>
         <Row>
-          {/*<h1>Hello home page!</h1>*/}
           <Col className="col-auto">
             <Products
               products={products}
@@ -162,14 +161,16 @@ const Home = () => {
           </Col>
         </Row>
 
-        {showCart && (
+        {!admin && (
           <Col className="col-auto">
-            <Cart
-              cartProducts={cartProducts}
-              onAddToCart={onAddToCart}
-              onRemoveFromCart={onRemoveFromCart}
-              checkout={checkout}
-            />
+            {showCart && (
+              <Cart
+                cartProducts={cartProducts}
+                onAddToCart={onAddToCart}
+                onRemoveFromCart={onRemoveFromCart}
+                checkout={checkout}
+              />
+            )}
           </Col>
         )}
       </Container>

@@ -6,11 +6,13 @@ import CheckoutCart from "../../components/CheckoutCart/CheckoutCart";
 import OrderForm from "../../components/OrderForm/OrderForm";
 import MainNav from "../../components/MainNav/MainNav";
 import {useHistory} from "react-router-dom";
+import {AdminContext} from "../../context/AdminContext";
 
 const Order = () => {
   const [cart, setCart] = useState({id: 0, products: []});
   const [showCart, setShowCart] = useState(true);
   const history = useHistory();
+  const {admin} = useContext(AdminContext);
 
   const itemsPrice = cart.products.reduce(
     (a, product) => a + product.price * product.amount,
@@ -30,7 +32,6 @@ const Order = () => {
     try {
       const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
       // If cart is empty, redirect user back home
-      console.log(data.oldCart);
       if (data.oldCart.cartProducts.length === 0) history.push("/");
       return data.oldCart;
     } catch (e) {
@@ -66,6 +67,7 @@ const Order = () => {
 
   // Get cart onInit
   useEffect(() => {
+    if (admin) return history.push("/");
     getCart().then((cartP) => {
       setCart({
         id: cartP.id,
