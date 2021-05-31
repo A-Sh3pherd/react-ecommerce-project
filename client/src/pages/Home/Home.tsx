@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import MainNav from "../../components/MainNav/MainNav";
 import CategoryNavbar from "../../components/CategoryNavbar/CategoryNavbar";
 import Products from "../../components/Products/Products";
@@ -7,12 +7,14 @@ import IProduct from "../../components/Products/Products.model";
 import Cart from "../../components/Cart/Cart";
 import {Col, Container, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
+import {AdminContext} from "../../context/AdminContext";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [pickedCategory, setPickedCategory] = useState(Number);
   const [cartProducts, setCartProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const {admin} = useContext(AdminContext);
 
   const history = useHistory();
 
@@ -41,7 +43,6 @@ const Home = () => {
   // Get cart onLoad
   async function getCart() {
     const user = JSON.parse(localStorage.getItem("activeUser"));
-
     const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
     return data;
   }
@@ -83,8 +84,6 @@ const Home = () => {
 
     if (exist.amount === 1) {
       setCartProducts(cartProducts.filter((prod) => prod.id !== product.id));
-      console.log("removing from cart: ");
-      console.log(product);
       await emptyCart(product.id);
     } else {
       setCartProducts(
@@ -113,11 +112,18 @@ const Home = () => {
     history.push("/order");
   }
 
+  // Everytime cartProducts changes
+  useEffect(() => {
+    updateCartOnDb().catch((e) => console.log(e));
+    cartProducts.length ? setShowCart(true) : setShowCart(false);
+  }, [cartProducts]);
+
   // Get Cart onload
   useEffect(() => {
+    admin && console.log(admin);
     getCart()
       .then((r) => {
-        r.oldCart.cartProducts > 0 && alert('You have an open cart!')
+        r.oldCart.cartProducts > 0 && alert("You have an open cart!");
         setCartProducts(
           r.oldCart.cartProducts.map((cartProduct) => ({
             ...cartProduct.product,
@@ -128,13 +134,6 @@ const Home = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  // Everytime cartProducts changes
-  useEffect(() => {
-    updateCartOnDb().catch((e) => console.log(e));
-
-    cartProducts.length ? setShowCart(true) : setShowCart(false);
-  }, [cartProducts]);
-
   return (
     <>
       <>
@@ -142,6 +141,7 @@ const Home = () => {
           cartAmount={cartProducts.length}
           showCartHandler={showCartHandler}
         />
+
         <CategoryNavbar
           pickCategory={pickCategory}
           setPickedCategory={setPickedCategory}

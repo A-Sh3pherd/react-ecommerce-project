@@ -42,10 +42,12 @@ function Register() {
   const [street, setStreet] = useState("");
   const history = useHistory();
 
+  // Getting the steps
   function getSteps() {
     return ["Enter email and password", "Shipping info"];
   }
 
+  // Fetching content from each step
   function getStepContent(step: number) {
     switch (step) {
       case 0:
@@ -74,10 +76,12 @@ function Register() {
     return step === 1;
   };
 
+  // If user tried to skip steps
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
 
+  // Next step Handler
   const handleNext = async () => {
     // Email validations
     if (!Auth.validateEmail(email)) return;
@@ -96,14 +100,17 @@ function Register() {
     setSkipped(newSkipped);
   };
 
+  // Go back stepper handler
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  // Reset stepper handler
   const handleReset = () => {
     setActiveStep(0);
   };
 
+  // Checking email availability
   async function checkIfEmailAvailable(): Promise<Boolean> {
     const {data} = await axios.get(`http://localhost:3005/register`, {
       params: {email},
@@ -118,9 +125,22 @@ function Register() {
     }
   }
 
+  // Registeration function With validations
   async function register() {
-    if (fname.length && lname.length < 2) return alert("Name is invalid.");
-    console.log("banana");
+    if (
+      fname.length < 3 ||
+      lname.length < 3 ||
+      fname === undefined ||
+      lname === undefined
+    )
+      return alert("Name is invalid.");
+    if (
+      city.length < 3 ||
+      street.length < 3 ||
+      city === undefined ||
+      street === undefined
+    )
+      return alert("City and street needs to be at least 3 letters!");
     const {data} = await axios.post("http://localhost:3005/register", {
       fname,
       lname,

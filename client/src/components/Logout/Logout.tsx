@@ -1,21 +1,15 @@
-import React, {useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import Auth from '../../Auth/Auth';
+import React, {useEffect} from "react";
+import {useHistory} from "react-router-dom";
+import Auth from "../../Auth/Auth";
 
 const Logout = () => {
-    const history = useHistory();
+  const history = useHistory();
 
-    useEffect(() => {
-        Auth.logout(() => {
-            history.push('/login');
-        })
-    }, [])
+  useEffect(() => {
+    history.push('/login')
+  }, [history]);
 
-    return (
-        <div>
-
-        </div>
-    );
+  return <div></div>;
 };
 
 export default Logout;

@@ -24,6 +24,15 @@ class Auth {
         if (!isAuth) return this.authenticated = false
     }
 
+    isAdmin() {
+        const user = JSON.parse(localStorage.getItem("activeUser"));
+        if (user.role === 'admin') {
+            return true
+        } else {
+            return false
+        }
+    }
+
     // Validations
     validateEmail(email: string) {
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
