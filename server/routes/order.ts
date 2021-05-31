@@ -1,6 +1,6 @@
-import {Orders} from "../db/entity/Orders";
-import {getRepository} from "typeorm";
-import {Cart} from "../db/entity/Cart";
+import { Orders } from "../db/entity/Orders";
+import { getRepository } from "typeorm";
+import { Cart } from "../db/entity/Cart";
 
 const express = require('express');
 const router = express.Router();
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const {city, street, credit_card, total_price, delivery_date, cartId, user} = req.body
+    const { city, street, credit_card, total_price, delivery_date, cartId, user } = req.body
 
     const orderRepo = getRepository(Orders);
     const cartRepo = getRepository(Cart);
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
         });
 
         // Making sure the cart we received is the same as the cart on the DB
-        if (cartExist.id !== cartId) return res.json({status: 400, message: 'Nice try ;)'})
+        if (cartExist.id !== cartId) return res.json({ status: 400, message: 'Nice try ;)' })
 
         // Placing a new Order after the cart validations
         const newOrder = await orderRepo.create({
@@ -39,6 +39,8 @@ router.post('/', async (req, res) => {
             cart: cartId,
             user
         }).save();
+
+        console.log(newOrder.id);
 
         // Closing the cart
         cartExist.status = 'shipping'
@@ -53,7 +55,7 @@ router.post('/', async (req, res) => {
 
     } catch (e) {
         console.log(e)
-        res.json({status: 404, message: 'Sorry, something went wrong.'})
+        res.json({ status: 404, message: 'Sorry, something went wrong.' })
     }
 })
 

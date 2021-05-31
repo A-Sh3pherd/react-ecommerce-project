@@ -26,6 +26,12 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { fname, lname, email, password, city, street } = req.body
+    // First and Last name validation
+    if (fname.length < 3 && typeof fname !== 'string') return res.json({ status: 'Fuck', message: 'First name must be 3 letters or more!' })
+    if (lname.length < 3 && typeof fname !== 'string') return res.json({ status: 'Fuck', message: 'Last name must be 3 letters or more!' })
+    // City and Street validation
+    if (typeof city !== 'string' && city.length < 3) return res.json({ status: 'Fuck', message: 'City MUST be 3 letters or more!' })
+    if (typeof street !== 'string' && street.length < 3) return res.json({ status: 'Fuck', message: 'Street MUST be 3 letters or more.' })
     // Fetching User repository
     const userRepo = getRepository(User);
     // Check if user already exists

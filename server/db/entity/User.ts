@@ -8,22 +8,34 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     fname: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     lname: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     email: string;
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     password: string
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     city: string
 
-    @Column()
+    @Column({
+        nullable: false
+    })
     street: string
 
     @Column({
