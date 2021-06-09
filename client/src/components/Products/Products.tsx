@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from "react";
 import {Card, Col, Row} from "react-bootstrap";
-import IProduct from "./Products.model";
-import "./Products.css";
-import {StyledProduct} from "./styles/StyledProduct";
 import {AdminContext} from "../../context/AdminContext";
+import "./Products.css";
+import IProduct from "./Products.model";
+import {StyledProduct} from "./styles/StyledProduct";
 
 const Products = ({
   products,
@@ -11,12 +11,23 @@ const Products = ({
   pickedCategory,
   getProducts,
   onAddToCart,
+  setShow,
+  setChangedProduct,
 }) => {
   const {admin} = useContext(AdminContext);
 
   // productChangeHandler
-  function productChangeHandler() {
-    console.log("change product");
+  async function productChangeHandler(product) {
+    console.log(`change product ${product.id}`);
+    setChangedProduct({
+      id: product.id,
+      name: product.name,
+      image_url: product.image_url,
+      price: product.price,
+      categoryName: product.category.name,
+      category: product.category.id,
+    });
+    setShow(true);
   }
   // Onload- Get all products
   useEffect(() => {
@@ -35,7 +46,7 @@ const Products = ({
         {products &&
           products.map((product: IProduct) => (
             <Col key={product.id}>
-              <Card style={{width: "16rem"}} className="product-card">
+              <Card style={{width: "14rem"}} className="product-card">
                 <Card.Img
                   variant="top"
                   style={{height: "300px"}}
@@ -53,7 +64,7 @@ const Products = ({
                   onClick={
                     !admin
                       ? () => onAddToCart(product)
-                      : () => productChangeHandler()
+                      : () => productChangeHandler(product)
                   }
                 >
                   {!admin ? "Add To Cart" : "Change Products"}

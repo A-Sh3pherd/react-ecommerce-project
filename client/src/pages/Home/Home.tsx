@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
-import MainNav from "../../components/MainNav/MainNav";
-import CategoryNavbar from "../../components/CategoryNavbar/CategoryNavbar";
-import Products from "../../components/Products/Products";
 import axios from "axios";
-import IProduct from "../../components/Products/Products.model";
-import Cart from "../../components/Cart/Cart";
 import {Col, Container, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
+import Cart from "../../components/Cart/Cart";
+import CategoryNavbar from "../../components/CategoryNavbar/CategoryNavbar";
+import MainNav from "../../components/MainNav/MainNav";
+import Products from "../../components/Products/Products";
+import IProduct from "../../components/Products/Products.model";
+import UpdateProductModal from "../../components/UpdateProductModal/UpdateProductModal";
 import {AdminContext} from "../../context/AdminContext";
 
 const Home = () => {
@@ -15,6 +16,9 @@ const Home = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const {admin, setAdmin} = useContext(AdminContext);
+  // Modal & Modal Handling
+  const [show, setShow] = useState(false);
+  const [changedProduct, setChangedProduct] = useState(null);
 
   const history = useHistory();
 
@@ -157,6 +161,13 @@ const Home = () => {
               pickedCategory={pickedCategory}
               getProducts={getProducts}
               onAddToCart={onAddToCart}
+              setShow={setShow}
+              setChangedProduct={setChangedProduct}
+            />
+            <UpdateProductModal
+              show={show}
+              setShow={setShow}
+              changedProduct={changedProduct}
             />
           </Col>
         </Row>

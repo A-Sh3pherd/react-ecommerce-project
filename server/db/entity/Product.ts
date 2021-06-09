@@ -9,10 +9,10 @@ import {
     OneToOne
 } from "typeorm";
 
-import {Cart_product} from "./Cart_product";
-import {Category} from "./Category";
+import { Cart_product } from "./Cart_product";
+import { Category } from "./Category";
 
-@Entity({name: "products"})
+@Entity({ name: "products" })
 export class Product extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
