@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./Order.css";
 import axios from "axios";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Form, Row} from "react-bootstrap";
 import CheckoutCart from "../../components/CheckoutCart/CheckoutCart";
 import OrderForm from "../../components/OrderForm/OrderForm";
 import MainNav from "../../components/MainNav/MainNav";
 import {useHistory} from "react-router-dom";
 import {AdminContext} from "../../context/AdminContext";
+import {ICart_products} from "../../models/Cart_product.model";
 
 const Order = () => {
   const [cart, setCart] = useState({id: 0, products: []});
@@ -33,7 +34,14 @@ const Order = () => {
       const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
       // If cart is empty, redirect user back home
       if (data.oldCart.cartProducts.length === 0) history.push("/");
-      return data.oldCart;
+      setCart({
+        id: data.oldCart.id,
+        products: data.oldCart.cartProducts.map((prod) => ({
+          ...prod.product,
+          amount: prod.amount,
+          total_price: prod.total_price,
+        })),
+      });
     } catch (e) {
       console.log(e);
     }
@@ -61,34 +69,18 @@ const Order = () => {
       alert("Fuck Yes! order has being placed !!!!!");
       history.push("/");
     } else {
-      alert("Something went wrong...");
+      alert(data.message);
     }
   };
 
   // Get cart onInit
   useEffect(() => {
     if (admin) return history.push("/");
-    getCart().then((cartP) => {
-      setCart({
-        id: cartP.id,
-        products: cartP.cartProducts.map((prod) => ({
-          ...prod.product,
-          amount: prod.amount,
-          total_price: prod.total_price,
-        })),
-      });
-    });
+    getCart();
   }, []);
 
   return (
     <>
-      <>
-        <MainNav
-          cartAmount={cart.products.length}
-          showCartHandler={showCartHandler}
-        />
-      </>
-
       {/*   CheckoutCart   */}
       <Container>
         <Row>

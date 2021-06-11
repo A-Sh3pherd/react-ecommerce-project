@@ -19,7 +19,6 @@ const Home = () => {
   // Modal & Modal Handling
   const [show, setShow] = useState(false);
   const [changedProduct, setChangedProduct] = useState(null);
-
   const history = useHistory();
 
   // Toggle show cart
@@ -142,8 +141,11 @@ const Home = () => {
     <>
       <>
         <MainNav
-          cartAmount={cartProducts.length}
+          cartProducts={cartProducts}
           showCartHandler={showCartHandler}
+          getProducts={getProducts}
+          products={products}
+          setProducts={setProducts}
         />
 
         <CategoryNavbar

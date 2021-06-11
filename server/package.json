@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
+    "@types/moment": "^2.13.0",
     "@types/node": "^8.0.29",
     "nodemon": "^2.0.7",
     "ts-node": "3.3.0",
@@ -15,6 +16,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "md5": "^2.3.0",
+    "moment": "^2.29.1",
     "mysql": "^2.14.1",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.32"

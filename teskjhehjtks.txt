@@ -1,0 +1,83 @@
+<Row className="nav-row">
+      <Navbar expand="md" bg={"light"} variant={"light"}>
+        <Col className="col-3 d-flex justify-content-center">
+          <Navbar.Brand href="#home"> Market-Project </Navbar.Brand>
+        </Col>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        {/*  Search */}
+        <Col className="col-3 d-flex justify-content-center">
+          <Form.Control type="search" />
+        </Col>
+        {/*  */}
+        <Navbar.Collapse id="basic-navbar-nav">
+          {/* Home */}
+          <div className="d-flex justify-content-center align-items-center mb-auto">
+            <Col className="col-2">
+              <Link
+                to="/"
+                className="nav-text"
+                style={{
+                  fontSize: "1rem",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <AiIcons.AiFillHome />
+                Home
+              </Link>
+            </Col>
+            {/* Logout */}
+            <Col className="col-2">
+              <Link
+                to="/logout"
+                className="nav-text"
+                style={{
+                  fontSize: "1rem",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <AiIcons.AiOutlineLogout />
+                Logout
+              </Link>
+            </Col>
+            {/* If not admin, Show cart. */}
+            {!admin && (
+              <Col className="col-2">
+                <Nav.Item
+                  className="nav-text cart-badge"
+                  style={{
+                    fontSize: "1rem",
+                    margin: "15px",
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                  onClick={showCartHandler}
+                >
+                  <div id="cart-span">
+                    <AiIcons.AiOutlineShoppingCart
+                      size={30}
+                      color="red"
+                      style={{cursor: "pointer"}}
+                    />
+                    {cartAmount ? (
+                      <span
+                        className="badge"
+                        style={{background: "red", opacity: "0.7"}}
+                      >
+                        {cartAmount}
+                      </span>
+                    ) : (
+                      <span style={{fontSize: "0.80rem", cursor: "pointer"}}>
+                        {" "}
+                        {"Cart is empty."}
+                      </span>
+                    )}
+                  </div>
+                </Nav.Item>
+              </Col>
+            )}
+          </div>
+        </Navbar.Collapse>
+      </Navbar>
+    </Row>

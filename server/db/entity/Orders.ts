@@ -25,7 +25,7 @@ export class Orders extends BaseEntity {
     street: string
 
     @Column()
-    delivery_date: Date
+    delivery_date: string
 
     @Column({})
     credit_card: string
