@@ -1,7 +1,7 @@
-import { getRepository } from "typeorm";
-import { Category } from "../../db/entity/Category";
-import { Product } from '../../db/entity/Product';
-import { User } from "../../db/entity/User";
+import {getRepository} from "typeorm";
+import {Category} from "../../db/entity/Category";
+import {Product} from '../../db/entity/Product';
+import {User} from "../../db/entity/User";
 
 const express = require('express');
 const router = express.Router();
@@ -10,9 +10,9 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const productRepo = getRepository(Product)
 
-    productRepo.find({ relations: ['category'] })
+    productRepo.find({relations: ['category']})
         .then(products => {
-            res.json({ allProducts: products })
+            res.json({allProducts: products})
         })
         .catch(err => console.log(err))
 })
@@ -27,7 +27,7 @@ router.get('/category/:id', async (req, res) => {
     // find all categories with the relations of PRODUCTS, where category = query
     const productsBasedOnCategoryId = await productRepo.find({
         relations: ['category'],
-        where: { 'category': categoryId }
+        where: {'category': categoryId}
     })
 
     // Respond to Client
@@ -38,42 +38,43 @@ router.get('/category/:id', async (req, res) => {
 
 // Add products
 router.post('/', async (req, res) => {
-    const userRepo = getRepository(User);
+    const {name, price, image_url, category} = req.body
     const categoryRepo = getRepository(Category);
     const productRepo = getRepository(Product);
-    const { name, price, image_url, category } = req.body
 
     // Fetching all categories
     const allCategories = []
-    const categories = await categoryRepo.find({ select: ['id', 'name'] })
+    const categories = await categoryRepo.find({select: ['id', 'name']})
     categories.map(category => {
         allCategories.push(category)
     })
 
     // Creating new product
-    const newProduct = productRepo.create({ name, price, image_url, category })
+    const newProduct = productRepo.create({name, price, image_url, category})
     await productRepo.save(newProduct)
         .then(() => {
             res.json({
-                products: newProduct,
-                // categories: allCategories
+                message: `${newProduct.name} Has been successfully added!`,
+                product: newProduct
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.json({message: err})
+        })
 
 
 })
 
 // Updating a product
 router.post('/update', async (req, res) => {
-    const { id, name, image_url, price, category } = req.body
-    console.log(req.body);
+    const {id, name, image_url, price, category} = req.body
 
     const productRepo = getRepository(Product);
 
     try {
         const changedProduct = await productRepo.findOne({
-            where: { id }
+            where: {id}
         })
         await productRepo.save({
             id,
@@ -83,14 +84,13 @@ router.post('/update', async (req, res) => {
             category
         })
         res.json({
-            message: 'Product was successfuly changed!',
+            message: `${name} was successfully updated!`,
             status: 'ok',
 
         })
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
-        res.json({ message: 'something went wrong while updating a product' })
+        res.json({message: 'something went wrong while updating a product'})
 
     }
 

@@ -9,23 +9,23 @@ import Order from "./pages/Order/Order";
 import {AdminContext} from "./context/AdminContext";
 
 function App() {
-  const [admin, setAdmin] = useState(null);
-  const adminProvider = useMemo(() => ({admin, setAdmin}), [admin, setAdmin]);
+    const [admin, setAdmin] = useState(null);
+    const adminProvider = useMemo(() => ({admin, setAdmin}), [admin, setAdmin]);
 
-  return (
-    <Router>
-      <Switch>
-        <AdminContext.Provider value={adminProvider}>
-          <ProtectedRoute exact path="/" Component={Home} />
-          <ProtectedRoute exact path="/order" Component={Order} />
+    return (
+        <Router>
+            <Switch>
+                <AdminContext.Provider value={adminProvider}>
+                    <ProtectedRoute exact path="/" Component={Home}/>
+                    <ProtectedRoute exact path="/order" Component={Order}/>
 
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/logout" exact component={Logout} />
-        </AdminContext.Provider>
-      </Switch>
-    </Router>
-  );
+                    <Route path="/login" exact component={Login}/>
+                    <Route path="/register" exact component={Register}/>
+                    <Route path="/logout" exact component={Logout}/>
+                </AdminContext.Provider>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;

@@ -1,15 +1,10 @@
-.cart-area {
-    /*margin-top: 65px;*/
-    /*border: 2px solid red;*/
-}
-  /*  */
 .block {
     background-color: #e0e0e0;
-    padding: 1rem;
-    margin-top: 65px ;
+    padding: 0.80rem;
+    margin-top: 50px;
     border-radius: 0.5rem;
-    width: 350px;
-    /*overflow: auto;*/
+    max-width: 450px;
+    overflow: hidden;
 }
 
 
@@ -21,7 +16,13 @@
     border: 0.1rem #404040 solid;
     background-color: #f0c040;
     width: 100%;
+    height: 28px;
     cursor: pointer;
+}
+
+.minus-plus {
+    display: flex;
+    justify-content: center;
 }
 
 .add {

@@ -13,6 +13,11 @@
   height: 90px;
 }
 
+.image-col {
+  display: flex;
+  justify-content: center;
+}
+
 .prices-area {
   font-size: 1.2rem;
 }

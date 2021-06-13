@@ -7,188 +7,195 @@ import CategoryNavbar from "../../components/CategoryNavbar/CategoryNavbar";
 import MainNav from "../../components/MainNav/MainNav";
 import Products from "../../components/Products/Products";
 import IProduct from "../../components/Products/Products.model";
-import UpdateProductModal from "../../components/UpdateProductModal/UpdateProductModal";
+import UpdateProductModal from "../../components/Modals/UpdateProductModal/UpdateProductModal";
 import {AdminContext} from "../../context/AdminContext";
+import StoreStats from "../../components/StoreStats/StoreStats";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [pickedCategory, setPickedCategory] = useState(Number);
-  const [cartProducts, setCartProducts] = useState([]);
-  const [showCart, setShowCart] = useState(false);
-  const {admin, setAdmin} = useContext(AdminContext);
-  // Modal & Modal Handling
-  const [show, setShow] = useState(false);
-  const [changedProduct, setChangedProduct] = useState(null);
-  const history = useHistory();
+    const [products, setProducts] = useState([]);
+    const [pickedCategory, setPickedCategory] = useState(Number);
+    const [cartProducts, setCartProducts] = useState([]);
+    const [showCart, setShowCart] = useState(false);
+    const {admin, setAdmin} = useContext(AdminContext);
+    // Modal & Modal Handling
+    const [show, setShow] = useState(false);
+    const [changedProduct, setChangedProduct] = useState(null);
+    const history = useHistory();
 
-  // Toggle show cart
-  const showCartHandler = () => setShowCart(!showCart);
+    // Toggle show cart
+    const showCartHandler = () => setShowCart(!showCart);
 
-  // When user picks a category
-  async function pickCategory(id: number) {
-    if (id === 0) {
-      const products: IProduct[] = await getProducts();
-      setProducts(products);
-    } else {
-      const {data} = await axios.get(
-        `http://localhost:3005/products/category/${id}`
-      );
-      setPickedCategory(data.products);
+    // When user picks a category
+    async function pickCategory(id: number) {
+        if (id === 0) {
+            const products: IProduct[] = await getProducts();
+            setProducts(products);
+        } else {
+            const {data} = await axios.get(
+                `http://localhost:3005/products/category/${id}`
+            );
+            setPickedCategory(data.products);
+        }
     }
-  }
 
-  // Get all products from db
-  async function getProducts(): Promise<IProduct[]> {
-    const {data} = await axios.get("http://localhost:3005/products");
-    return data.allProducts;
-  }
-
-  // Get cart onLoad
-  async function getCart() {
-    const user = JSON.parse(localStorage.getItem("activeUser"));
-    if (user.role === "admin") {
-      return setAdmin(user);
-    } else {
-      const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
-      data.oldCart.cartProducts > 0 && alert("You have an open cart!");
-      setCartProducts(
-        data.oldCart.cartProducts.map((cartProduct) => ({
-          ...cartProduct.product,
-          amount: cartProduct.amount,
-        }))
-      );
+    // Get all products from db
+    async function getProducts(): Promise<IProduct[]> {
+        const {data} = await axios.get("http://localhost:3005/products");
+        return data.allProducts;
     }
-  }
 
-  // Update cart on db- whenever user add/remove product
-  async function updateCartOnDb() {
-    if (admin) return;
-    console.log("Updating cart");
-    const activeUser = JSON.parse(localStorage.getItem("activeUser"));
-
-    await axios.put(`http://localhost:3005/cart/update`, {
-      products: cartProducts,
-      user: activeUser.id,
-    });
-  }
-
-  // When adding to cart
-  const onAddToCart = async (product) => {
-    const exist = cartProducts.find((x) => x.id === product.id);
-    if (exist) {
-      setCartProducts(
-        cartProducts.map((prod) =>
-          prod.id === product.id
-            ? {
-                ...exist,
-                amount: exist.amount + 1,
-              }
-            : prod
-        )
-      );
-    } else {
-      setCartProducts([...cartProducts, {...product, amount: 1}]);
+    // Get cart onLoad
+    async function getCart() {
+        const user = JSON.parse(localStorage.getItem("activeUser"));
+        if (user.role === "admin") {
+            return setAdmin(user);
+        } else {
+            const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
+            data.oldCart.cartProducts > 0 && alert("You have an open cart!");
+            setCartProducts(
+                data.oldCart.cartProducts.map((cartProduct) => ({
+                    ...cartProduct.product,
+                    amount: cartProduct.amount,
+                }))
+            );
+        }
     }
-    // If cart is not empty, show it to the client.
-  };
 
-  // When removing from cart
-  const onRemoveFromCart = async (product) => {
-    const exist = cartProducts.find((prod) => prod.id === product.id);
+    // Update cart on db- whenever user add/remove product
+    async function updateCartOnDb() {
+        if (admin) return;
+        const activeUser = JSON.parse(localStorage.getItem("activeUser"));
 
-    if (exist.amount === 1) {
-      setCartProducts(cartProducts.filter((prod) => prod.id !== product.id));
-      await emptyCart(product.id);
-    } else {
-      setCartProducts(
-        cartProducts.map((prod) =>
-          prod.id === product.id
-            ? {
-                ...exist,
-                amount: exist.amount - 1,
-              }
-            : prod
-        )
-      );
+        await axios.put(`http://localhost:3005/cart/update`, {
+            products: cartProducts,
+            user: activeUser.id,
+        });
     }
-  };
 
-  // When emptying cart
-  async function emptyCart(productId: number) {
-    const userId = JSON.parse(localStorage.getItem("activeUser"));
-    await axios.delete(`http://localhost:3005/cart/${userId.id}`, {
-      params: {productId: productId},
-    });
-  }
+    // When adding to cart
+    const onAddToCart = async (product) => {
+        const exist = cartProducts.find((x) => x.id === product.id);
+        if (exist) {
+            setCartProducts(
+                cartProducts.map((prod) =>
+                    prod.id === product.id
+                        ? {
+                            ...exist,
+                            amount: exist.amount + 1,
+                        }
+                        : prod
+                )
+            );
+        } else {
+            setCartProducts([...cartProducts, {...product, amount: 1}]);
+        }
+        // If cart is not empty, show it to the client.
+    };
 
-  // When user Checkout
-  async function checkout() {
-    history.push("/order");
-  }
+    // When removing from cart
+    const onRemoveFromCart = async (product) => {
+        const exist = cartProducts.find((prod) => prod.id === product.id);
 
-  // Everytime cartProducts changes
-  useEffect(() => {
-    updateCartOnDb().catch((e) => console.log(e));
-    cartProducts.length ? setShowCart(true) : setShowCart(false);
-  }, [cartProducts]);
+        if (exist.amount === 1) {
+            setCartProducts(cartProducts.filter((prod) => prod.id !== product.id));
+            await emptyCart(product.id);
+        } else {
+            setCartProducts(
+                cartProducts.map((prod) =>
+                    prod.id === product.id
+                        ? {
+                            ...exist,
+                            amount: exist.amount - 1,
+                        }
+                        : prod
+                )
+            );
+        }
+    };
 
-  // Get Cart onload
-  useEffect(() => {
-    getCart().catch((e) => console.log(e));
-  }, []);
+    // When emptying cart
+    async function emptyCart(productId: number) {
+        const userId = JSON.parse(localStorage.getItem("activeUser"));
+        await axios.delete(`http://localhost:3005/cart/${userId.id}`, {
+            params: {productId: productId},
+        });
+    }
 
-  return (
-    <>
-      <>
-        <MainNav
-          cartProducts={cartProducts}
-          showCartHandler={showCartHandler}
-          getProducts={getProducts}
-          products={products}
-          setProducts={setProducts}
-        />
+    // When user Checkout
+    async function checkout() {
+        history.push("/order");
+    }
 
-        <CategoryNavbar
-          pickCategory={pickCategory}
-          setPickedCategory={setPickedCategory}
-        />
-      </>
+    // Everytime cartProducts changes
+    useEffect(() => {
+        updateCartOnDb().catch((e) => console.log(e));
+        cartProducts.length ? setShowCart(true) : setShowCart(false);
+    }, [cartProducts]);
 
-      <Container fluid className="d-flex" style={{width: "80%"}}>
-        <Row>
-          <Col className="col-auto">
-            <Products
-              products={products}
-              setProducts={setProducts}
-              pickedCategory={pickedCategory}
-              getProducts={getProducts}
-              onAddToCart={onAddToCart}
-              setShow={setShow}
-              setChangedProduct={setChangedProduct}
-            />
+    // On Page Init => Get Cart
+    useEffect(() => {
+        getCart()
+            .catch((e) => console.log(e));
+    }, []);
+
+    return (
+        <>
+            <>
+                <MainNav
+                    cartProducts={cartProducts}
+                    showCartHandler={showCartHandler}
+                    getProducts={getProducts}
+                    products={products}
+                    setProducts={setProducts}
+                    showCart={showCart}
+                    setShowCart={setShowCart}
+                />
+
+                <CategoryNavbar
+                    pickCategory={pickCategory}
+                    setPickedCategory={setPickedCategory}
+                />
+            </>
+
+            <Container fluid style={{width: '90%'}}>
+                <Row>
+                    <Col>
+                        <Products
+                            products={products}
+                            setProducts={setProducts}
+                            pickedCategory={pickedCategory}
+                            getProducts={getProducts}
+                            onAddToCart={onAddToCart}
+                            setShow={setShow}
+                            setChangedProduct={setChangedProduct}
+                            showCart={showCart}
+                            setShowCart={setShowCart}
+                        />
+                    </Col>
+                    {!admin && (
+                        <>
+                            {showCart && (
+                                <Col className='col-auto'>
+                                    <Cart
+                                        cartProducts={cartProducts}
+                                        onAddToCart={onAddToCart}
+                                        onRemoveFromCart={onRemoveFromCart}
+                                        checkout={checkout}
+                                    />
+                                </Col>
+                            )}
+                        </>
+                    )}
+                </Row>
+            </Container>
+            {/*   Update Product Modal   */}
             <UpdateProductModal
-              show={show}
-              setShow={setShow}
-              changedProduct={changedProduct}
+                show={show}
+                setShow={setShow}
+                changedProduct={changedProduct}
             />
-          </Col>
-        </Row>
-
-        {!admin && (
-          <Col className="col-auto">
-            {showCart && (
-              <Cart
-                cartProducts={cartProducts}
-                onAddToCart={onAddToCart}
-                onRemoveFromCart={onRemoveFromCart}
-                checkout={checkout}
-              />
-            )}
-          </Col>
-        )}
-      </Container>
-    </>
-  );
+        </>
+    );
 };
 
 export default Home;

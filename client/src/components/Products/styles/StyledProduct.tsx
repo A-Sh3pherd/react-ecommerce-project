@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const StyledProduct = styled.div`
-  #products-main-row {
-    margin-top: 50px;
-  }
 
   .product-price {
     font-weight: bold;
@@ -12,10 +9,9 @@ export const StyledProduct = styled.div`
   }
 
   .product-card {
-    margin: 15px;
+    margin: 50px auto;
     overflow: auto;
-    height: 31rem;
-    font-size: 0.82rem;
+    font-size: 0.90rem;
   }
 
   .add-to-cart-button {
