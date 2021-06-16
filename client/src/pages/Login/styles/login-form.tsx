@@ -12,8 +12,7 @@ export const StyledLoginBackground = styled.div`
 export const StyledLoginForm = styled.form`
   border: 1px solid #dbdbdb;
   box-shadow: 0 0 50px -6px grey;
-  width: 10vw;
-  min-width: 25%;
+  width: 325px;
   padding: 1rem;
   font-size: 0.85rem;
   margin-top: 5rem;

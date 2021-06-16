@@ -6,7 +6,7 @@ import CheckoutCart from "../../components/CheckoutCart/CheckoutCart";
 import OrderForm from "../../components/OrderForm/OrderForm";
 import {useHistory} from "react-router-dom";
 import {AdminContext} from "../../context/AdminContext";
-import OrderCompleteModal from "../../components/Modals/OrderCompleteModal/OrderCompleteModal";
+import OrderCompleteModal from "../../components/Modals/OrderCompleteModal";
 import {Link} from 'react-router-dom';
 import * as AiIcons from 'react-icons/ai';
 

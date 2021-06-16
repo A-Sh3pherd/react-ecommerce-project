@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Form, Modal} from "react-bootstrap";
 import axios from "axios";
-import {Category} from "../../../../../server/db/entity/Category";
+import {Category} from "../../../../server/db/entity/Category";
+import {useHistory} from "react-router-dom";
 
-function UpdateProductModal({show, setShow, changedProduct}) {
-    const handleClose = () => setShow(false);
+function UpdateProductModal({show, setShow}) {
     const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
     const [name, setName] = useState("");
     const [image_url, setImage_url] = useState("");
     const [price, setPrice] = useState("");
     const [categories, setCategories] = useState<Category[]>();
     const [chosenCategory, setChosenCategory] = useState({})
+    const history = useHistory();
 
 
     async function getCategories() {
@@ -18,15 +20,19 @@ function UpdateProductModal({show, setShow, changedProduct}) {
         return data;
     }
 
-    async function updateProduct() {
-        const {data} = await axios.post("http://localhost:3005/products/update", {
-            id: changedProduct.id,
-            name: name ? name : changedProduct.name,
-            image_url: image_url ? image_url : changedProduct.image_url,
-            price: price ? price : changedProduct.price,
-            category: chosenCategory ? chosenCategory : changedProduct.category,
+    async function addProduct() {
+        // Validations
+        if (!name || !image_url || !price || !chosenCategory) return alert('You must fill all parts of the form')
+        //
+        const {data} = await axios.post("http://localhost:3005/products", {
+            name,
+            image_url,
+            price,
+            category: chosenCategory
         });
-        alert(data.message);
+        alert(data.message)
+        handleClose()
+        history.push('/')
     }
 
     useEffect(() => {
@@ -41,33 +47,37 @@ function UpdateProductModal({show, setShow, changedProduct}) {
         <div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title> Update Product </Modal.Title>
+                    <Modal.Title> Add Product </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group>
                         <Form.Label> Name </Form.Label>
                         <Form.Control
                             onChange={(e) => setName(e.target.value)}
-                            placeholder={changedProduct && changedProduct.name}
+                            // placeholder={changedProduct && changedProduct.name}
                         />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Image </Form.Label>
                         <Form.Control
                             onChange={(e) => setImage_url(e.target.value)}
-                            placeholder={changedProduct && changedProduct.image_url}
+                            // placeholder={changedProduct && changedProduct.image_url}
                         />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Price </Form.Label>
                         <Form.Control
                             onChange={(e) => setPrice(e.target.value)}
-                            placeholder={changedProduct && changedProduct.price}
+                            // placeholder={changedProduct && changedProduct.price}
                         />
                     </Form.Group>
+                    {/*  Categories  */}
                     <Form.Group>
                         <Form.Label> Category </Form.Label>
                         <Form.Control as="select" onChange={e => setChosenCategory(e.target.value)}>
+                            <option value="-">
+                                -
+                            </option>
                             {categories && categories.map(item => (
                                 <option value={item.id}>
                                     {item.name}
@@ -76,20 +86,16 @@ function UpdateProductModal({show, setShow, changedProduct}) {
                         </Form.Control>
                     </Form.Group>
                 </Modal.Body>
+                {/*  Buttons  */}
                 <Modal.Footer className='d-flex justify-content-center'>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
                     <Button
                         variant="primary"
-                        onClick={() => {
-                            updateProduct().then(() => {
-                                handleClose();
-                            })
-                                .catch(e => console.log(e))
-                        }}
+                        onClick={addProduct}
                     >
-                        Update Product
+                        Add Product
                     </Button>
                 </Modal.Footer>
             </Modal>

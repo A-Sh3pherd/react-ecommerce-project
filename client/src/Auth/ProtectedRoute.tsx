@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import Auth from './Auth';
 
-const ProtectedRoute = ({ Component, ...rest }) => {
+const ProtectedRoute = ({Component, ...rest}) => {
+
     return (
         <Route
             {...rest}

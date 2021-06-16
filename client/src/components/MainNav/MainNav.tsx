@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {AdminContext} from "../../context/AdminContext";
 import {MainNavData} from "./MainNavData";
 import logo from '../../imgs/smallLogo.png';
-import AddProductModal from "../Modals/AddProductModal/AddProductModal";
+import AddProductModal from "../Modals/AddProductModal";
 
 
 const MainNav = ({
@@ -21,7 +21,6 @@ const MainNav = ({
     const [searchValue, setSearchValue] = useState("");
     // Add Product Modal Handling
     const [show, setShow] = useState(false)
-
 
     // Searching Product
     async function setSearch() {

@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, {useContext, useState} from "react";
-import {Col, Container} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import Auth from "../../Auth/Auth";
 import {AdminContext} from "../../context/AdminContext";
 import LoginForm from "./LoginForm";
+import StoreStats from "../../components/StoreStats/StoreStats";
+import StoreImage from "./styles/StoreImage";
 import Logo from '../../imgs/LogoWithApple.png';
+import StorePhoto from '../../imgs/Group 2.png';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -34,13 +37,26 @@ const Login = () => {
             <Col className='col-12 d-flex justify-content-center mt-5'>
                 <img src={Logo} alt="Logo"/>
             </Col>
-            <Container fluid className='d-flex justify-content-center'>
+
+            <Container fluid>
                 {/*Login Form*/}
-                <LoginForm
-                    setEmail={setEmail}
-                    setPassword={setPassword}
-                    login={login}
-                />
+                <Row>
+                    <Col className='col-4 d-flex justify-content-center'>
+                        <LoginForm
+                            setEmail={setEmail}
+                            setPassword={setPassword}
+                            login={login}
+                        />
+                    </Col>
+
+                    <Col className='col-4 d-flex justify-content-center'>
+                        <StoreImage src={StorePhoto} alt='StorePic'/>
+                    </Col>
+
+                    <Col className='col-4 d-flex justify-content-center'>
+                        <StoreStats/>
+                    </Col>
+                </Row>
             </Container>
         </>
     );

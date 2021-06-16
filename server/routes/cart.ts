@@ -1,6 +1,6 @@
-import { getRepository } from "typeorm";
-import { Cart } from "../db/entity/Cart";
-import { Cart_product } from "../db/entity/Cart_product";
+import {getRepository} from "typeorm";
+import {Cart} from "../db/entity/Cart";
+import {Cart_product} from "../db/entity/Cart_product";
 
 const express = require('express');
 const router = express.Router();
@@ -19,16 +19,23 @@ router.get('/:id', async (req, res) => {
     const cartRepo = getRepository(Cart);
 
     try {
+        // Find an opened Cart
         const oldCart = await cartRepo.findOne({
-            where: { user, status: 'open' },
+            where: {user, status: 'open'},
             relations: ['cartProducts']
         })
         if (oldCart) {
-            res.json({ message: 'There is an incomplete cart', oldCart })
+            // Checking if there is old orders
+            const existOrders = await cartRepo.find({where: {user, status: 'shipping'}})
+            const lastOrder = existOrders[existOrders.length - 1]
+            // Decide what to return the client
+            existOrders
+                ? res.json({message: 'There is an incomplete cart', oldCart, lastOrder, orders: existOrders})
+                : res.json({message: 'new cart', oldCart})
         } else {
-            const newCart = cartRepo.create({ user: req.params.id });
+            const newCart = cartRepo.create({user: req.params.id});
             await cartRepo.save(newCart)
-            return res.json({ message: 'New cart was created', newCart })
+            return res.json({message: 'New cart was created', newCart})
         }
     } catch (e) {
         console.log(e)
@@ -38,7 +45,7 @@ router.get('/:id', async (req, res) => {
 
 // On Update
 router.put('/update', async (req, res) => {
-    const { products, user: userId } = req.body;
+    const {products, user: userId} = req.body;
 
     const cartProductRepo = getRepository(Cart_product);
     const cartRepo = getRepository(Cart);
@@ -46,14 +53,13 @@ router.put('/update', async (req, res) => {
     // Locating the old cart
     const oldCart = await cartRepo.findOne({
         relations: ['cartProducts'],
-        where: { status: 'open', user: { id: userId } }
+        where: {status: 'open', user: {id: userId}}
     })
 
     // Looping through all products and updating the amount and existance
     for (const product of products) {
         // Fill cartProduct with the data from the the old cart
-        const productExist = oldCart.cartProducts.find(({ product: prod }) => product.id === prod.id)
-
+        const productExist = oldCart.cartProducts.find(({product: prod}) => product.id === prod.id)
         // If product exist, just change the amount
         if (productExist) {
             productExist.amount = product.amount
@@ -67,8 +73,7 @@ router.put('/update', async (req, res) => {
             });
         }
     }
-
-    res.json({ status: 'ok'})
+    res.json({status: 'ok'})
 })
 
 
@@ -83,10 +88,10 @@ router.delete('/:userId', async (req, res) => {
         await cartProductRepo.createQueryBuilder()
             .delete()
             .from(Cart_product)
-            .where("product = :id", { id: product })
+            .where("product = :id", {id: product})
             .execute()
             .then(() => {
-                res.json({ message: 'Product was successfully removed from cart' })
+                res.json({message: 'Product was successfully removed from cart'})
             })
     } catch (e) {
         console.log(e)

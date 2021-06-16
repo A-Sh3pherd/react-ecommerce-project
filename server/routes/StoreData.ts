@@ -12,8 +12,6 @@ router.get('/', async (req, res) => {
     const allOrders = await orderRepo.find()
     const allProducts = await productRepo.find()
 
-    console.log(allOrders.length)
-    console.log(allProducts.length)
     res.json({
         orders: allOrders.length,
         products: allProducts.length

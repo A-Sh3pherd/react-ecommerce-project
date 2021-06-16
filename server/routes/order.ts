@@ -60,7 +60,6 @@ router.post('/', async (req, res) => {
         // Closing the cart
         cartExist.status = 'shipping'
         await cartExist.save();
-        console.log('All good!')
         // Responding to the client
         res.json({
             status: 'ok',

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Button, Modal} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 
@@ -9,7 +8,7 @@ const OrderCompleteModal = ({show, setShow, cart}) => {
     // const cartProducts: ICart_products[] = cart.products;
     const download = () => {
         console.log('Creating Receipt');
-        handleClose(); // Closing the modal
+        handleClose();
         // setTimeout to make sure modal is closed before taking picture
         setTimeout(() => {
             window.print()

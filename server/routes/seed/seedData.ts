@@ -8,7 +8,6 @@ const axios = require('axios');
 
 //   Amir is the fucking king םכ products!
 router.get('/amir', async (req, res) => {
-    console.log('you entered')
     const {data} = await axios.post('https://api.powerdrop.io/v1/products/get',
         {
             "amount": 1,
@@ -18,7 +17,6 @@ router.get('/amir', async (req, res) => {
             headers:
                 {Token: process.env.AMIR_TOKEN, "Content-Type": "application/json"}
         })
-    // console.log(data)
     const productArr = []
     data.map(product => {
         productArr.push(
@@ -29,8 +27,6 @@ router.get('/amir', async (req, res) => {
         const productRepo = getRepository(Product);
 
         const addedProducts = await productRepo.create(product);
-        // console.log(addedProducts)
         await productRepo.save(addedProducts).catch(err => console.log(err))
-        console.log('Saved!!!!!!')
     }
 })

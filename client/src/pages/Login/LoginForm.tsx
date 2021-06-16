@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {Button, Container, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {
@@ -10,6 +10,12 @@ import Logo from '../../imgs/Login.png';
 
 
 function LoginForm({setEmail, setPassword, login}) {
+    const mainRef = useRef(null)
+
+    useEffect(() => {
+        mainRef.current.focus()
+    }, [])
+
     return (
         <StyledLoginForm>
             <h2 className="text-center">
@@ -21,6 +27,7 @@ function LoginForm({setEmail, setPassword, login}) {
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
+                            ref={mainRef}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>

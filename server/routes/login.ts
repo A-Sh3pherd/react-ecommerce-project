@@ -10,14 +10,13 @@ router.get('/', async (req, res) => {
 
     const user = await userRepo.findOne({where: {email, password}})
 
-    
+
     if (user) {
 
         if (user.role === 'admin') return res.json({message: 'Welcome back admin', user})
         return res.json({message: 'user found', user})
     }
     res.json({message: 'Username or password are incorrect.'})
-
 
 
 })

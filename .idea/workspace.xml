@@ -2,37 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af1e7c65-fe44-4984-affb-6ee06502b414" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Modals/UpdateProductModal/UpdateProductModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Cart/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Cart/Cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Cart/Cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Cart/Cart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Auth/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Auth/ProtectedRoute.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/MainNav/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainNav/MainNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainNav/MainNavData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainNav/MainNavData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/OrderForm/OrderForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/OrderForm/OrderForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Modals/AddProductModal/AddProductModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Modals/AddProductModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Modals/OrderCompleteModal/OrderCompleteModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Modals/OrderCompleteModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Modals/UpdateProductModal/UpdateProductModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Modals/UpdateProductModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Products/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Products/Products.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Products/styles/StyledProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Products/styles/StyledProduct.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UpdateProductModal/UpdateProductModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/StoreStats/StoreStats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/StoreStats/StoreStats.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Home/Home.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login/Login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Login/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Login/styles/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login/styles/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Order/Order.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Order/Order.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Order/Order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Order/Order.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Register/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepOne.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepOne.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/styles/StyledRegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/styles/StyledRegisterForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/StoreData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/StoreData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/cart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/cart.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/login.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/order.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/order.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/products/products.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/products/products.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/seedData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/seed/seedData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teskjhehjtks.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/seed/seedData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/seed/seedData.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,18 +54,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/client/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/server/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/Modals" />
       <recent name="$PROJECT_DIR$/client/src/imgs" />
       <recent name="$PROJECT_DIR$/client/src/pages/Register" />
       <recent name="$PROJECT_DIR$/client/src/pages/Login" />
       <recent name="$PROJECT_DIR$/client/src/components/MainNav" />
-      <recent name="$PROJECT_DIR$/client/public" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -89,7 +82,9 @@
       <workItem from="1623492229588" duration="39000" />
       <workItem from="1623492293741" duration="66000" />
       <workItem from="1623495668224" duration="1049000" />
-      <workItem from="1623496737338" duration="50706000" />
+      <workItem from="1623496737338" duration="54268000" />
+      <workItem from="1623703231569" duration="144000" />
+      <workItem from="1623749201297" duration="24883000" />
     </task>
     <servers />
   </component>

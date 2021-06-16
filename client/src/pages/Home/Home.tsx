@@ -1,15 +1,18 @@
-import React, {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import Cart from "../../components/Cart/Cart";
 import CategoryNavbar from "../../components/CategoryNavbar/CategoryNavbar";
 import MainNav from "../../components/MainNav/MainNav";
 import Products from "../../components/Products/Products";
 import IProduct from "../../components/Products/Products.model";
-import UpdateProductModal from "../../components/Modals/UpdateProductModal/UpdateProductModal";
+import UpdateProductModal from "../../components/Modals/UpdateProductModal";
 import {AdminContext} from "../../context/AdminContext";
-import StoreStats from "../../components/StoreStats/StoreStats";
+import moment from "moment";
+import CartInfo from "../../components/Modals/CartInfo";
+import OrderInfo from "../../components/Modals/OrderInfo";
+import NewUserModal from '../../components/Modals/NewUserModal';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -47,18 +50,34 @@ const Home = () => {
     // Get cart onLoad
     async function getCart() {
         const user = JSON.parse(localStorage.getItem("activeUser"));
+        // Check if user is an admin
         if (user.role === "admin") {
             return setAdmin(user);
         } else {
+            // Check if it's a new user
+            const newUser = localStorage.getItem('newUser')
+            if (newUser) {
+                NewUserModal(newUser)
+                localStorage.removeItem('newUser');
+            }
             const {data} = await axios.get(`http://localhost:3005/cart/${user.id}`);
-            data.oldCart.cartProducts > 0 && alert("You have an open cart!");
+            // Setting the Cart
             setCartProducts(
                 data.oldCart.cartProducts.map((cartProduct) => ({
                     ...cartProduct.product,
                     amount: cartProduct.amount,
                 }))
             );
+            // Calculate total price
+            const totalCartPrice = data.oldCart.cartProducts.map(product => product.total_price)
+                .reduce((a, b) => a + b, 0)
+            // If cart has products
+            if (data.oldCart.cartProducts.length > 0) return CartInfo(moment(data.oldCart.created_at).format('LL'), totalCartPrice)
+            // If user ordered before or not
+            if (data.lastOrder) return OrderInfo(`${moment(data.lastOrder.created_at).format('LL')}`)
         }
+        // If user never ordered
+        // data.orders
     }
 
     // Update cart on db- whenever user add/remove product

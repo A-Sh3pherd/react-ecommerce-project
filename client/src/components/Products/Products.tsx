@@ -19,7 +19,6 @@ const Products = ({
 
     // productChangeHandler
     async function productChangeHandler(product) {
-        console.log(`change product ${product.id}`);
         setChangedProduct({
             id: product.id,
             name: product.name,

@@ -1,5 +1,5 @@
-import React, {useState, useMemo} from "react";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {useMemo, useState} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import ProtectedRoute from "./Auth/ProtectedRoute";

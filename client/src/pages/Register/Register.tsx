@@ -14,7 +14,6 @@ import axios from "axios";
 import {StyledRegisterForm, StyledSpan} from "./styles/StyledRegisterForm";
 import Logo from './iPay Register.png'
 
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -74,6 +73,7 @@ function Register() {
         }
     }
 
+    // If step is required
     const isStepOptional = (step: number) => {
         return step === 1;
     };
@@ -129,16 +129,19 @@ function Register() {
 
     // Registration function With validations
     async function register() {
+        // Name Validations
         if (
             fname.length < 3 ||
             lname.length < 3
         )
             return alert("Name is invalid.");
+        // City & Street validations
         if (
             city.length < 3 ||
             street.length < 3
         )
             return alert("City and street needs to be at least 3 letters!");
+        // Register
         const {data} = await axios.post("http://localhost:3005/register", {
             fname,
             lname,
@@ -148,6 +151,8 @@ function Register() {
             street,
         });
         if (!data.user) return alert(data.message);
+        // Creating new user in the local storage
+        localStorage.setItem('newUser', fname);
         alert("User was successfully created!");
         history.push("/login");
     }

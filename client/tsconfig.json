@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
     "target": "es5",
-    "module": "esnext",
-    "moduleResolution": "node",
     "lib": [
       "DOM",
-      "ES5",
-      "ES6"
+      "dom.iterable",
+      "ESNext"
     ],
-    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "node",
     "isolatedModules": true,
     "esModuleInterop": true,
     "strict": false,
@@ -22,7 +22,7 @@
     "sourceMap": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules/"
