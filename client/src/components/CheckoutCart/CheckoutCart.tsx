@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
 import IProduct from "../Products/Products.model";
 import "./CheckoutCart.css";

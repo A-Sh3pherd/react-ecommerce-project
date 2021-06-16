@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import {AdminContext} from "../../context/AdminContext";
 import {StyledProduct} from "./styles/StyledProduct";
@@ -13,7 +13,6 @@ const Products = ({
                       setShow,
                       setChangedProduct,
                       showCart,
-                      setShowCart,
                   }) => {
     const {admin} = useContext(AdminContext);
 
@@ -37,6 +36,7 @@ const Products = ({
             .catch((err) => console.log(err));
     }, []);
 
+    // Everytime
     useEffect(() => {
         setProducts(pickedCategory);
     }, [pickedCategory, setProducts]);

@@ -1,4 +1,3 @@
-import React from "react";
 import {Form} from "react-bootstrap";
 
 function RegisterStepOne({setEmail, setPassword, setSecondPassword}) {
@@ -6,7 +5,7 @@ function RegisterStepOne({setEmail, setPassword, setSecondPassword}) {
         <Form>
             <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="text" onChange={(e) => setEmail(e.target.value)}/>
+                <Form.Control type="text" onChange={(e) => setEmail(e.target.value)} placeholder='Example@gmail.com'/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Password</Form.Label>

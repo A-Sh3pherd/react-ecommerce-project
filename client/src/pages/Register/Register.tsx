@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {makeStyles, Theme, createStyles} from "@material-ui/core/styles";
+import {ReactNode, useState} from "react";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -12,7 +12,11 @@ import Auth from "../../Auth/Auth";
 import RegisterStepTwo from "./RegisterStepTwo";
 import axios from "axios";
 import {StyledRegisterForm, StyledSpan} from "./styles/StyledRegisterForm";
-import Logo from './iPay Register.png'
+
+// @ts-ignore
+import Logo from "./iPay Register.png";
+import ErrorModal from "../../components/Modals/ErrorModal";
+import MessageModal from "../../components/Modals/MessageModal";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,10 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function Register() {
-    const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [skipped, setSkipped] = React.useState(new Set<number>());
-    const steps = getSteps();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [secondPassword, setSecondPassword] = useState("");
@@ -42,6 +42,10 @@ function Register() {
     const [city, setCity] = useState("");
     const [street, setStreet] = useState("");
     const history = useHistory();
+    const classes = useStyles();
+    const [activeStep, setActiveStep] = useState(0);
+    const [skipped, setSkipped] = useState(new Set<number>());
+    const steps = getSteps();
 
     // Getting the steps
     function getSteps() {
@@ -130,18 +134,13 @@ function Register() {
     // Registration function With validations
     async function register() {
         // Name Validations
-        if (
-            fname.length < 3 ||
-            lname.length < 3
-        )
-            return alert("Name is invalid.");
+        if (fname.length ! < 3) return ErrorModal("First Name is invalid");
+        if (lname.length ! < 3) return ErrorModal("Last Name is invalid.");
         // City & Street validations
-        if (
-            city.length < 3 ||
-            street.length < 3
-        )
-            return alert("City and street needs to be at least 3 letters!");
+        if (!city) return ErrorModal("You must select a city from the list!");
+        if (street.length ! < 3) return ErrorModal("Street must be at least 3 Letters!")
         // Register
+        console.log(city)
         const {data} = await axios.post("http://localhost:3005/register", {
             fname,
             lname,
@@ -150,20 +149,21 @@ function Register() {
             city,
             street,
         });
-        if (!data.user) return alert(data.message);
+        if (!data.user) return ErrorModal(data.message);
         // Creating new user in the local storage
         localStorage.setItem('newUser', fname);
-        alert("User was successfully created!");
+        MessageModal("User was successfully created!", 'Cool ! ');
         history.push("/login");
     }
 
     return (
         <div className={classes.root}>
             <Container>
+                {/*  Stepper  */}
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {
                         const stepProps: { completed?: boolean } = {};
-                        const labelProps: { optional?: React.ReactNode } = {};
+                        const labelProps: { optional?: ReactNode } = {};
                         if (isStepOptional(index)) {
                             labelProps.optional = (
                                 <Typography variant="caption">Optional</Typography>
@@ -180,8 +180,8 @@ function Register() {
                     })}
                 </Stepper>
             </Container>
-
             <Row>
+                {/*  Logo  */}
                 <Col className='d-flex justify-content-center'>
                     <img src={Logo} alt="Reg-Logo"/>
                 </Col>
@@ -194,16 +194,19 @@ function Register() {
                             <Typography className={classes.instructions}>
                                 All steps completed - you&apos;re finished
                             </Typography>
+                            {/*  Reset Button  */}
                             <Button onClick={handleReset} className={classes.button}>
                                 Reset
                             </Button>
                         </div>
                     ) : (
                         <div>
+                            {/*   Getting the steps  */}
                             <Typography className={classes.instructions}>
                                 {getStepContent(activeStep)}
                             </Typography>
                             <div>
+                                {/*  Back Button  */}
                                 <Button
                                     disabled={activeStep === 0}
                                     onClick={handleBack}

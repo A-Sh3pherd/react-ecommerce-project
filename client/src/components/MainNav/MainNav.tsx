@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Col, Container, Form, Nav, Navbar, Row} from "react-bootstrap";
 import * as AiIcons from "react-icons/ai";
 import {Link} from "react-router-dom";
 import {AdminContext} from "../../context/AdminContext";
 import {MainNavData} from "./MainNavData";
+// @ts-ignore
 import logo from '../../imgs/smallLogo.png';
 import AddProductModal from "../Modals/AddProductModal";
 

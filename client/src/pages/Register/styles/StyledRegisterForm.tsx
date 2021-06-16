@@ -15,7 +15,8 @@ export const StyledSpan = styled.span`
 
   :hover {
     color: rgb(65, 85, 200);
-    font-size: 1.1rem;
-    transition: 2500ms ease-in;
+    font-size: 1rem;
+    word-break: break-all;
+    transition: 1200ms ease-in;
   }
 `;

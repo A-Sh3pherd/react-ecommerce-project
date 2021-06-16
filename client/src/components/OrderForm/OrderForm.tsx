@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import "./OrderForm.css";
+import {cities} from "../../pages/Order/cities";
 
 const OrderForm = ({placeOrder}) => {
     const [city, setCity] = useState("");
@@ -20,8 +21,13 @@ const OrderForm = ({placeOrder}) => {
                 <Form.Label> City </Form.Label>
                 <Form.Control
                     onChange={(e) => setCity(e.target.value)}
-                    value={city && city}
-                />
+                    as='select'
+                >
+                    <option value={city && city}> {city} </option>
+                    {cities.map(c => (
+                        c !== city && <option value={c}> {c} </option>
+                    ))}
+                </Form.Control>
             </Form.Group>
             <Form.Group>
                 <Form.Label> Street </Form.Label>

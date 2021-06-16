@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import "./Order.css";
 import axios from "axios";
 import {Col, Container, Nav, Row} from "react-bootstrap";

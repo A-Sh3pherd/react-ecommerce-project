@@ -13,6 +13,7 @@ import moment from "moment";
 import CartInfo from "../../components/Modals/CartInfo";
 import OrderInfo from "../../components/Modals/OrderInfo";
 import NewUserModal from '../../components/Modals/NewUserModal';
+import RightNav from "../../components/MainNav/RightNav";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
