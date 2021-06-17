@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
 })
 
+// Place order
 router.post('/', async (req, res) => {
     const {city, street, credit_card, total_price, delivery_date, cartId, user} = req.body
 
@@ -35,12 +36,19 @@ router.post('/', async (req, res) => {
         const allDates = await orderRepo.find()
 
         // Count if theres more then 3 orders for the specific day
-        let counter = 0
-        allDates.forEach(date => {
-            date.delivery_date === delivery_date
-                ? counter++
-                : null
+        const counter = allDates
+            .reduce((count, curr) => curr.delivery_date === delivery_date && count++, 0);
+
+        const tagsFromOutsource = ['Leaf Problem', 'Plant Disease', 'Poop face'];
+        const arr = [{name: 'Leaf Problem', id: 1}, {name: 'Plant Disease', id: 2}, {name: 'Poop face', id: 3}];
+        const map = arr.reduce((map, tag) => {
+            map[tag.name] = tag.id;
+            return map;
+        } ,{});
+        tagsFromOutsource.forEach(tag => {
+            const id = map[tag];
         })
+
         // If more then 3 orders for this date, tell client deliveries are full
         if (counter >= 3) return res.json({
             status: 404,
