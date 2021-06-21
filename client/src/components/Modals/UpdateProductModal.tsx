@@ -11,22 +11,42 @@ function UpdateProductModal({show, setShow, changedProduct}) {
     const [price, setPrice] = useState("");
     const [categories, setCategories] = useState<Category[]>();
     const [chosenCategory, setChosenCategory] = useState({})
+    const [photoInput, setPhotoInput] = useState('');
 
-
+    // Get all categories
     async function getCategories() {
         const {data} = await axios.get("http://localhost:3005/category");
         return data;
     }
 
+    // Updating a product
     async function updateProduct() {
+        const image = await uploadImage()
         const {data} = await axios.post("http://localhost:3005/products/update", {
             id: changedProduct.id,
             name: name ? name : changedProduct.name,
-            image_url: image_url ? image_url : changedProduct.image_url,
+            image_url: image ? image : changedProduct.image_url,
             price: price ? price : changedProduct.price,
             category: chosenCategory ? chosenCategory : changedProduct.category,
         });
         alert(data.message);
+    }
+
+
+    // Handling image
+    const handleFileInput = (e) => {
+        setPhotoInput(e.target.files)
+    }
+    // Uploading Image
+    const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append('file', photoInput[0]);
+        formData.append('upload_preset', 'ecommerce-project');
+        console.log('Starting to upload');
+        const {data} = await axios.post("https://api.cloudinary.com/v1_1/bananalotty/image/upload", formData);
+        console.log('Finished uploading')
+        setImage_url(data.url)
+        return data.url
     }
 
     useEffect(() => {
@@ -53,9 +73,12 @@ function UpdateProductModal({show, setShow, changedProduct}) {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Image </Form.Label>
+                        <Form.Label> Image </Form.Label>
+                        <br/>
                         <Form.Control
-                            onChange={(e) => setImage_url(e.target.value)}
+                            onChange={e => handleFileInput(e)}
                             placeholder={changedProduct && changedProduct.image_url}
+                            type="file"
                         />
                     </Form.Group>
                     <Form.Group>

@@ -135,6 +135,7 @@ function Register() {
     async function register() {
         // Name Validations
         if (fname.length ! < 3) return ErrorModal("First Name is invalid");
+
         if (lname.length ! < 3) return ErrorModal("Last Name is invalid.");
         // City & Street validations
         if (!city) return ErrorModal("You must select a city from the list!");
