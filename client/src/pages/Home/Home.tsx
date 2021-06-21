@@ -9,11 +9,10 @@ import Products from "../../components/Products/Products";
 import IProduct from "../../components/Products/Products.model";
 import UpdateProductModal from "../../components/Modals/UpdateProductModal";
 import {AdminContext} from "../../context/AdminContext";
-import moment from "moment";
+import * as moment from "moment";
 import CartInfo from "../../components/Modals/CartInfo";
 import OrderInfo from "../../components/Modals/OrderInfo";
 import NewUserModal from '../../components/Modals/NewUserModal';
-import RightNav from "../../components/MainNav/RightNav";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -189,7 +188,6 @@ const Home = () => {
                             setShow={setShow}
                             setChangedProduct={setChangedProduct}
                             showCart={showCart}
-                            setShowCart={setShowCart}
                         />
                     </Col>
                     {!admin && (

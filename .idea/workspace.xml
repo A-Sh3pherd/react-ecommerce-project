@@ -3,22 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="af1e7c65-fe44-4984-affb-6ee06502b414" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CategoryNavbar/CategoryNavbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CategoryNavbar/CategoryNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CategoryNavbar/CategoryNavbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CheckoutCart/CheckoutCart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/MainNav/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MainNav/MainNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/OrderForm/OrderForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/OrderForm/OrderForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Products/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Products/Products.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Home/Home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Order/Order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Order/Order.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepOne.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepOne.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepTwo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/RegisterStepTwo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Register/styles/StyledRegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Register/styles/StyledRegisterForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/fuck.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/fuck.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,16 +37,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/server/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/client/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
       <recent name="$PROJECT_DIR$/client/src/components/Modals" />
       <recent name="$PROJECT_DIR$/client/src/imgs" />
       <recent name="$PROJECT_DIR$/client/src/pages/Register" />
       <recent name="$PROJECT_DIR$/client/src/pages/Login" />
-      <recent name="$PROJECT_DIR$/client/src/components/MainNav" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -78,7 +64,10 @@
       <workItem from="1623495668224" duration="1049000" />
       <workItem from="1623496737338" duration="54268000" />
       <workItem from="1623703231569" duration="144000" />
-      <workItem from="1623749201297" duration="35197000" />
+      <workItem from="1623749201297" duration="35464000" />
+      <workItem from="1623873730580" duration="2541000" />
+      <workItem from="1623946102509" duration="7682000" />
+      <workItem from="1624134577362" duration="3885000" />
     </task>
     <servers />
   </component>
